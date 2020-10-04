@@ -30,7 +30,7 @@ public class AddressBookSystem {
 	public static void main(String args[])
 	{
 		ArrayList <Contact> c=new ArrayList<Contact>();
-		System.out.println("Welcome to Address Book program");
+		System.out.println("Welcome to Address Book System");
 		Scanner sc=new Scanner(System.in);
 		
 		int num=0;
@@ -41,8 +41,8 @@ public class AddressBookSystem {
 			num=sc.nextInt();
 			if(num==1)
 			{
-				Contact a=new Contact();
-				a.addContact();
+				Contact adding =new Contact();
+				adding.addContact();
 				
 			}
 		}
