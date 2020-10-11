@@ -6,6 +6,13 @@ class Contact {
     Scanner sc = new Scanner(System.in);
     String first_name, last_name, address, String, city, state, zip, ph_no, email;
 
+    public boolean equals(Contact cnt) {
+        if (cnt.first_name.equalsIgnoreCase(this.first_name) && cnt.last_name.equalsIgnoreCase(this.last_name)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     public void addContact() {
 
         System.out.println("Enter First Name");
