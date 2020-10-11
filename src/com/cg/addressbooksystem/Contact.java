@@ -25,4 +25,28 @@ class Contact {
         System.out.println("Enter email");
         String email = sc.next();
     }
+    public void editContact()
+    {
+        System.out.println("Enter Address");
+        this.address=sc.next();
+        System.out.println("Enter city");
+        this.city=sc.next();
+        System.out.println("Enter state");
+        this.state=sc.next();
+        System.out.println("Enter zip code");
+        this.zip=sc.next();
+        System.out.println("Enter phone number");
+        this.ph_no=sc.next();
+        System.out.println("Enter email");
+        this.email=sc.next();
+    }
+    public void viewContact()
+    {
+        System.out.println("ADDRESS = "+this.address);
+        System.out.println("CITY = "+this.city);
+        System.out.println("STATE = "+this.state);
+        System.out.println("ZIP = "+this.zip);
+        System.out.println("PHONE NUMBER ="+this.ph_no);
+        System.out.println("EMAIL ="+this.email);
+    }
 }
