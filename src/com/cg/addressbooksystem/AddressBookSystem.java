@@ -9,7 +9,6 @@ public class AddressBookSystem {
         System.out.println("Welcome to Address Book System");
         Scanner sc = new Scanner(System.in);
 
-        //HashMap<String, AddressBook> a = new HashMap<String, AddressBook>();
         ArrayList<AddressBook> adbook = new ArrayList<AddressBook>();
 
         int r = 0;
@@ -29,15 +28,7 @@ public class AddressBookSystem {
                     break;
                 }
 
-        /*int x = 0;
-        System.out.println("Enter the number of the Address Books ");
-        int k = sc.nextInt();
-        for (int i = 0; i < k; i++) {
-            System.out.println("Enter the name of the Address Book" + (i + 1));
-            String name = sc.next();
-            AddressBook b = new AddressBook();
-            a.put(name, b);
-        }*/
+
                 case 2: {
                     int key = 0;
                     System.out.println("Enter the address book name to be accessed");
@@ -56,14 +47,9 @@ public class AddressBookSystem {
                                 num = sc.nextInt();
                                 String name = new String();
 
-                                /*
-                                if (x != 5) {
-                                    System.out.println("Exited out of the current Address Book. Now In which address book?");
-                                    name = sc.next();
-                                */
+
                                 if (num == 1) {
 
-                                    //a.get(name).addContact();
                                     Contact a = new Contact();
                                     a.addContact();
                                     adbook.get(j).contact.add(a);
