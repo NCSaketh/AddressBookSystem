@@ -3,8 +3,10 @@ package com.cg.addressbooksystem;
 import java.util.ArrayList;
 
 class AddressBook {
+    String BookName;
     ArrayList<Contact> contact = new ArrayList<Contact>();
 
+<<<<<<< HEAD
     public boolean checkDuplicate(Contact cnt) {
         return (contact.stream().anyMatch(contact -> contact.equals(cnt)));
     }
@@ -37,14 +39,8 @@ class AddressBook {
         if (nameChecking(ln, fn, i)) ;
         contact.get(i).editContact();
     }
-
-    public void viewContact(String fn, String ln, int i) {
-        if (nameChecking(ln, fn, i)) ;
-        contact.get(i).viewContact();
-    }
-
-    public void deleteContact(String fn, String ln, int i) {
-        if (nameChecking(ln, fn, i)) ;
-        contact.remove(i);
-    }
+=======
 }
+>>>>>>> UC6_MultipleAddress
+
+
