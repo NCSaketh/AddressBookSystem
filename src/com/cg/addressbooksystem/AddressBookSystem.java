@@ -10,14 +10,12 @@ public class AddressBookSystem {
         return (adbook.contact.stream().anyMatch(c -> c.equals(contact)));
     }
 
-    static List<Contact> searchNameByCity(AddressBook adbook,String cityString)
-    {
-        return adbook.contact.stream().filter(c-> c.city.equals(cityString)).collect(Collectors.toList());
+    static List<Contact> searchNameByCity(AddressBook adbook, String cityString) {
+        return adbook.contact.stream().filter(c -> c.city.equals(cityString)).collect(Collectors.toList());
     }
 
-    static List<Contact> searchNameByState(AddressBook adbook,String stateString)
-    {
-        return adbook.contact.stream().filter(c-> c.state.equals(stateString)).collect(Collectors.toList());
+    static List<Contact> searchNameByState(AddressBook adbook, String stateString) {
+        return adbook.contact.stream().filter(c -> c.state.equals(stateString)).collect(Collectors.toList());
     }
 
     public static void main(String args[]) {
@@ -85,7 +83,9 @@ public class AddressBookSystem {
                                     } else {
                                         adbook.get(j).contact.add(a);
                                     }
-                                } else if (num == 2) {
+                                }
+
+                                else if (num == 2) {
                                     System.out.println("Enter First Name");
                                     String fn = sc.next();
                                     System.out.println("Enter Last Name");
@@ -103,7 +103,9 @@ public class AddressBookSystem {
                                         adbook.get(j).contact.get(i).editContact();
                                     }
 
-                                } else if (num == 3) {
+                                }
+
+                                else if (num == 3) {
                                     System.out.println("Enter First Name");
                                     String fn = sc.next();
                                     System.out.println("Enter Last Name");
@@ -121,7 +123,9 @@ public class AddressBookSystem {
                                         adbook.get(j).contact.get(i).viewContact();
                                     }
 
-                                } else if (num == 4) {
+                                }
+
+                                else if (num == 4) {
                                     System.out.println("Enter the First Name");
                                     String fn = sc.next();
                                     System.out.println("Enter the Last Name");
@@ -140,7 +144,9 @@ public class AddressBookSystem {
 
                                     }
 
-                                } else if (num == 5) {
+                                }
+
+                                else if (num == 5) {
                                     break;
                                 }
                             }
@@ -154,43 +160,37 @@ public class AddressBookSystem {
                 }
                 case 3: {
                     System.out.println("Enter the city ");
-                    String city=sc.next();
-                    List<Contact> snc=new ArrayList();
-                    for(int k=0;k<adbook.size();k++)
-                    {
-                        snc.addAll(searchNameByCity(adbook.get(k),city));
+                    String city = sc.next();
+                    List<Contact> snc = new ArrayList();
+                    for (int k = 0; k < adbook.size(); k++) {
+                        snc.addAll(searchNameByCity(adbook.get(k), city));
                     }
-                    if(snc.size()==0)
-                    {
+                    if (snc.size() == 0) {
                         System.out.println("No Contacts Found");
-                    }
-                    else
-                    {
-                        for(int k=0;k<adbook.size();k++)
-                        {
-                            System.out.println(snc.get(k).first_name + " "+snc.get(k).last_name);
+                    } else {
+                        for (int k = 0; k < adbook.size(); k++) {
+                            System.out.println(snc.get(k).first_name + " " + snc.get(k).last_name);
                         }
+                        System.out.println("The number of persons living in city " + city + " are " + snc.size());
                     }
+                    break;
                 }
 
                 case 4: {
                     System.out.println("Enter the State ");
-                    String state=sc.next();
-                    List<Contact> sns=new ArrayList();
-                    for(int k=0;k<adbook.size();k++)
-                    {
-                        sns.addAll(searchNameByState(adbook.get(k),state));
+                    String state = sc.next();
+                    List<Contact> sns = new ArrayList();
+                    for (int k = 0; k < adbook.size(); k++) {
+                        sns.addAll(searchNameByState(adbook.get(k), state));
                     }
-                    if(sns.size()==0)
-                    {
+                    if (sns.size() == 0) {
                         System.out.println("No Contacts Found");
-                    }
-                    else
-                    {
-                        for(int k=0;k<adbook.size();k++)
-                        {
-                            System.out.println(sns.get(k).first_name + " "+sns.get(k).last_name);
+                    } else {
+                        for (int k = 0; k < adbook.size(); k++) {
+                            System.out.println(sns.get(k).first_name + " " + sns.get(k).last_name);
                         }
+                        System.out.println("The number of persons living in state " + state + " are " + sns.size());
+
                     }
                     break;
                 }
