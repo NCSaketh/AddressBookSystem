@@ -56,7 +56,15 @@ public class AddressBookSystem {
 
                                     Contact a = new Contact();
                                     a.addContact();
+<<<<<<< HEAD
                                     adbook.get(j).contact.add(a);
+=======
+                                    if (checkDuplicate(adbook.get(j), a)) {
+                                        System.out.println("Provided Contact Already Exists");
+                                    } else {
+                                        adbook.get(j).contact.add(a);
+                                    }
+>>>>>>> UC7_NoDuplicate
                                 } else if (num == 2) {
                                     System.out.println("Enter First Name");
                                     String fn = sc.next();
