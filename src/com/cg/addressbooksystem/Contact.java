@@ -13,6 +13,7 @@ class Contact {
             return false;
         }
     }
+
     public void addContact() {
 
         System.out.println("Enter First Name");
@@ -28,9 +29,9 @@ class Contact {
         System.out.println("Enter zip code");
         this.zip = sc.next();
         System.out.println("Enter phone number");
-        String ph_no = sc.next();
+        this.ph_no = sc.next();
         System.out.println("Enter email");
-        String email = sc.next();
+        this.email = sc.next();
     }
     public void editContact()
     {
