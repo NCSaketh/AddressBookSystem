@@ -49,7 +49,6 @@ public class AddressBookSystem {
 
 
                                 if (num == 1) {
-
                                     Contact a = new Contact();
                                     a.addContact();
                                     adbook.get(j).contact.add(a);
