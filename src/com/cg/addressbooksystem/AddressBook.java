@@ -6,5 +6,9 @@ class AddressBook {
     String BookName;
     ArrayList<Contact> contact = new ArrayList<Contact>();
 
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> UC7_NoDuplicate

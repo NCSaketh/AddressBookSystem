@@ -13,6 +13,7 @@ class Contact {
             return false;
         }
     }
+
     public void addContact() {
 
         System.out.println("Enter First Name");

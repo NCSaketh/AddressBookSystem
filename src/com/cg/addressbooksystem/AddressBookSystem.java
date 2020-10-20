@@ -5,6 +5,10 @@ import java.util.*;
 
 public class AddressBookSystem {
 
+    static boolean checkDuplicate(AddressBook adbook, Contact contact) {
+        return (adbook.contact.stream().anyMatch(c -> c.equals(contact)));
+    }
+
     public static void main(String args[]) {
         System.out.println("Welcome to Address Book System");
         Scanner sc = new Scanner(System.in);
