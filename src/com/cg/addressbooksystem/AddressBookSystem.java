@@ -1,12 +1,18 @@
 package com.cg.addressbooksystem;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class AddressBookSystem {
 
     static boolean checkDuplicate(AddressBook adbook, Contact contact) {
         return (adbook.contact.stream().anyMatch(c -> c.equals(contact)));
+    }
+
+    static List<Contact> searchNameByCity(AddressBook adbook,String cityString)
+    {
+        return adbook.contact.stream().filter(c-> c.city.equals(cityString)).collect(Collectors.toList());
     }
 
     public static void main(String args[]) {
@@ -19,19 +25,32 @@ public class AddressBookSystem {
         while (r != 3) {
             System.out.println("1.CREATE AN ADDRESS BOOK");
             System.out.println("2.ACCESS AN ADDRESS BOOK");
-            System.out.println("3.EXIT THE APPLICATION");
+            System.out.println("3.SEARCH PERSON IN A CITY ACROSS ALL ADDRESS BOOKS");
+            System.out.println("4.EXIT APPLICATION");
             r = sc.nextInt();
             AddressBook book;
             switch (r) {
                 case 1: {
-                    System.out.println("Enter the name of address book to be created");
+                    System.out.println("Enter the name of the Address Book  to be created");
                     String n = sc.next();
-                    book = new AddressBook();
-                    book.BookName = n;
-                    adbook.add(book);
+                    int key = 0;
+                    for (int i = 0; i < adbook.size(); i++) {
+                        if (adbook.get(i).BookName.equalsIgnoreCase(n)) {
+                            key = 1;
+                            break;
+                        }
+                    }
+                    if (key == 0) {
+                        AddressBook b = new AddressBook();
+                        b.BookName = n;
+                        b.contact = new ArrayList<Contact>();
+                        adbook.add(b);
+                        break;
+                    } else {
+                        System.out.println("Provided Address Book Already Exists.");
+                    }
                     break;
                 }
-
 
                 case 2: {
                     int key = 0;
@@ -56,15 +75,11 @@ public class AddressBookSystem {
 
                                     Contact a = new Contact();
                                     a.addContact();
-<<<<<<< HEAD
-                                    adbook.get(j).contact.add(a);
-=======
                                     if (checkDuplicate(adbook.get(j), a)) {
                                         System.out.println("Provided Contact Already Exists");
                                     } else {
                                         adbook.get(j).contact.add(a);
                                     }
->>>>>>> UC7_NoDuplicate
                                 } else if (num == 2) {
                                     System.out.println("Enter First Name");
                                     String fn = sc.next();
@@ -130,9 +145,29 @@ public class AddressBookSystem {
                     if (key == 0) {
                         System.out.println("This Address Book does not exist!");
                     }
-                }
-                default:
                     break;
+                }
+                case 3: {
+                    System.out.println("Enter the city ");
+                    String city=sc.next();
+                    List<Contact> snc=new ArrayList();
+                    for(int k=0;k<adbook.size();k++)
+                    {
+                        snc.addAll(searchNameByCity(adbook.get(k),city));
+                    }
+                    if(snc.size()==0)
+                    {
+                        System.out.println("No Contacts Found");
+                    }
+                    else
+                    {
+                        for(int k=0;k<adbook.size();k++)
+                        {
+                            System.out.println(snc.get(k).first_name + " "+snc.get(k).last_name);
+                        }
+                    }
+                }
+
             }
         }
     }
