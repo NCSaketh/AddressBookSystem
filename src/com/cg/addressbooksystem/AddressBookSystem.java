@@ -15,6 +15,11 @@ public class AddressBookSystem {
         return adbook.contact.stream().filter(c-> c.city.equals(cityString)).collect(Collectors.toList());
     }
 
+    static List<Contact> searchNameByState(AddressBook adbook,String stateString)
+    {
+        return adbook.contact.stream().filter(c-> c.state.equals(stateString)).collect(Collectors.toList());
+    }
+
     public static void main(String args[]) {
         System.out.println("Welcome to Address Book System");
         Scanner sc = new Scanner(System.in);
@@ -26,7 +31,8 @@ public class AddressBookSystem {
             System.out.println("1.CREATE AN ADDRESS BOOK");
             System.out.println("2.ACCESS AN ADDRESS BOOK");
             System.out.println("3.SEARCH PERSON IN A CITY ACROSS ALL ADDRESS BOOKS");
-            System.out.println("4.EXIT APPLICATION");
+            System.out.println("4.SEARCH PERSON IN A STATE ACROSS ALL ADDRESS BOOKS");
+            System.out.println("5.EXIT APPLICATION");
             r = sc.nextInt();
             AddressBook book;
             switch (r) {
@@ -165,6 +171,28 @@ public class AddressBookSystem {
                             System.out.println(snc.get(k).first_name + " "+snc.get(k).last_name);
                         }
                     }
+                }
+
+                case 4: {
+                    System.out.println("Enter the State ");
+                    String state=sc.next();
+                    List<Contact> sns=new ArrayList();
+                    for(int k=0;k<adbook.size();k++)
+                    {
+                        sns.addAll(searchNameByState(adbook.get(k),state));
+                    }
+                    if(sns.size()==0)
+                    {
+                        System.out.println("No Contacts Found");
+                    }
+                    else
+                    {
+                        for(int k=0;k<adbook.size();k++)
+                        {
+                            System.out.println(sns.get(k).first_name + " "+sns.get(k).last_name);
+                        }
+                    }
+                    break;
                 }
 
             }
