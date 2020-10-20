@@ -24,6 +24,25 @@ public class AddressBookSystem {
              .forEach(System.out::println);
     }
 
+    static void sortByCity(AddressBook adbook) {
+        adbook.contact.stream().sorted((c1, c2) -> c1.city.compareTo(c2.city))
+                .forEach(c -> System.out.println(c.first_name + ", " + c.last_name + "belongs to city " + c.city));
+
+    }
+
+    static void sortByState(AddressBook adbook) {
+        adbook.contact.stream().sorted((c1, c2) -> c1.state.compareTo(c2.state))
+                .forEach(c -> System.out.println(c.first_name + ", " + c.last_name + " belongs to state " + c.state));
+
+    }
+
+    static void sortByZip(AddressBook adbook) {
+        adbook.contact.stream().sorted((c1, c2) -> c1.zip.compareTo(c2.zip))
+                .forEach(c -> System.out.println(c.first_name + ", " + c.last_name + " belongs to zip " + c.zip));
+
+    }
+
+
     public static void main(String args[]) {
         System.out.println("Welcome to Address Book System");
         Scanner sc = new Scanner(System.in);
@@ -98,13 +117,16 @@ public class AddressBookSystem {
             {
                 key = 1;
                 int num = 0;
-                while (num != 6) {
+                while (num != 9) {
                     System.out.println("1.ADD A CONTACT DETAIL");
                     System.out.println("2.EDIT EXISTING CONTACT USING NAME");
                     System.out.println("3.VIEW CONTACT DETAILS USING NAME ");
                     System.out.println("4.DELETE THE CONTACT OF A PERSON");
                     System.out.println("5.SORT ENTRIES IN ADDRESS BOOK BASED ON NAME");
-                    System.out.println("6.EXIT CURRENT ADDRESS BOOK");
+                    System.out.println("6.SORT ENTRIES IN ADDRESS BOOK BASED ON CITY");
+                    System.out.println("7.SORT ENTRIES IN ADDRESS BOOK BASED ON STATE");
+                    System.out.println("8.SORT ENTRIES IN ADDRESS BOOK BASED ON ZIP");
+                    System.out.println("9.EXIT CURRENT ADDRESS BOOK");
                     num = sc.nextInt();
                     String name = new String();
 
@@ -187,6 +209,19 @@ public class AddressBookSystem {
 
                     else if (num == 5) {
                         sortByName(adbook.get(j));
+                        break;
+                    }
+
+                    else if (num == 6) {
+                        sortByCity(adbook.get(j));
+                        break;
+                    }
+                    else if (num == 7) {
+                        sortByState(adbook.get(j));
+                        break;
+                    }
+                    else if (num == 8) {
+                        sortByZip(adbook.get(j));
                         break;
                     }
                 }

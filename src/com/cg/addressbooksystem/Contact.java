@@ -14,6 +14,11 @@ class Contact {
         }
     }
 
+    public String toString() {
+        return this.first_name + ", " + this.last_name;
+    }
+
+
     public void addContact() {
 
         System.out.println("Enter First Name");
