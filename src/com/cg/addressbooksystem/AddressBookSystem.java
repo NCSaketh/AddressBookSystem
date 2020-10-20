@@ -208,7 +208,7 @@ public class AddressBookSystem {
         {
             snc.addAll(searchNameByCity(adbook.get(k), city));
         }
-        
+
         if (snc.size() == 0) {
             System.out.println("No Contacts Found");
         } else {
