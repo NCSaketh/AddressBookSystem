@@ -24,11 +24,24 @@ public class AddressBookSystem {
             AddressBook book;
             switch (r) {
                 case 1: {
-                    System.out.println("Enter the name of address book to be created");
+                    System.out.println("Enter the address book name to be created");
                     String n = sc.next();
-                    book = new AddressBook();
-                    book.BookName = n;
-                    adbook.add(book);
+                    int key = 0;
+                    for (int i = 0; i < adbook.size(); i++) {
+                        if (adbook.get(i).BookName.equalsIgnoreCase(n)) {
+                            key = 1;
+                            break;
+                        }
+                    }
+                    if (key == 0) {
+                        AddressBook b = new AddressBook();
+                        b.BookName = n;
+                        b.contact = new ArrayList<Contact>();
+                        adbook.add(b);
+                        break;
+                    } else {
+                        System.out.println("Address Book Already Exists.");
+                    }
                     break;
                 }
 
