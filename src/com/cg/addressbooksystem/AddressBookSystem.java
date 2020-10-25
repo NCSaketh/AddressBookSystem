@@ -1,5 +1,9 @@
 package com.cg.addressbooksystem;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -49,12 +53,13 @@ public class AddressBookSystem {
         ArrayList<AddressBook> adbook = new ArrayList<AddressBook>();
 
         int r = 0;
-        while (r != 5) {
+        while (r != 6) {
             System.out.println("1.CREATE AN ADDRESS BOOK");
             System.out.println("2.ACCESS AN ADDRESS BOOK");
             System.out.println("3.SEARCH PERSON IN A CITY ACROSS ALL ADDRESS BOOKS");
             System.out.println("4.SEARCH PERSON IN A STATE ACROSS ALL ADDRESS BOOKS");
-            System.out.println("5.EXIT APPLICATION");
+            System.out.println("5.READ DATA FROM THE FILE");
+            System.out.println("6.EXIT APPLICATION");
             r = sc.nextInt();
             AddressBook book;
             switch (r) {
@@ -72,6 +77,19 @@ public class AddressBookSystem {
                 }
                 case 4: {
                     accessByState(adbook);
+                    break;
+                }
+
+                case 5: {
+                    try {
+                        FileReader f=new FileReader("C:\\Users\\Nc Saketh\\eclipse-workspace\\AddressBookSystem\\Data.txt");
+                        int i;
+                        while((i=f.read())!=-1)
+                            System.out.print((char)i);
+                    }
+                    catch(Exception e) {
+
+                    }
                     break;
                 }
             }
@@ -224,9 +242,11 @@ public class AddressBookSystem {
                         sortByZip(adbook.get(j));
                         break;
                     }
+
                 }
 
             }
+            writeInFile(adbook.get(j).contact);
         }
         if (key == 0) {
             System.out.println("This Address Book does not exist!");
@@ -276,5 +296,27 @@ public class AddressBookSystem {
         }
 
     }
+
+    static boolean writeInFile(ArrayList<Contact> array)
+    {
+        StringBuffer string=new StringBuffer();
+        array.stream().forEach(c ->
+        {
+            String concat=c.toString().concat("\n");
+            string.append(concat);
+        }
+        );
+        try
+        {
+            Path path=Paths.get("C:\\Users\\Nc Saketh\\eclipse-workspace\\AddressBookSystem\\Data.txt");
+            Files.write(path,string.toString().getBytes());
+            return true;
+        }
+        catch(Exception e)
+        {
+            return false;
+        }
+    }
+
 
 }
