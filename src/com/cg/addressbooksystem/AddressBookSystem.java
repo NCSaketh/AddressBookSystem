@@ -131,8 +131,8 @@ public class AddressBookSystem {
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
-                    Contact[] usrObj= gson.fromJson(br, Contact[].class);
-                    List<Contact> contactList = Arrays.asList(usrObj);
+                    Contact[] userOBJ= gson.fromJson(br, Contact[].class);
+                    List<Contact> contactList = Arrays.asList(userOBJ);
                     for (Contact c : contactList){
                         c.addContact();
                     }
