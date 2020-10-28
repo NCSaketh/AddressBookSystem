@@ -12,6 +12,8 @@ import com.opencsv.CSVWriter;
 import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 
 public class AddressBookSystem {
@@ -59,14 +61,15 @@ public class AddressBookSystem {
         ArrayList<AddressBook> adbook = new ArrayList<AddressBook>();
 
         int r = 0;
-        while (r != 8) {
+        while (r != 9) {
             System.out.println("1.CREATE AN ADDRESS BOOK");
             System.out.println("2.ACCESS AN ADDRESS BOOK");
             System.out.println("3.SEARCH PERSON IN A CITY ACROSS ALL ADDRESS BOOKS");
             System.out.println("4.SEARCH PERSON IN A STATE ACROSS ALL ADDRESS BOOKS");
             System.out.println("5.READ DATA FROM THE FILE");
             System.out.println("6.READ DATA FROM THE CSV FILE");
-            System.out.println("7.EXIT APPLICATION");
+            System.out.println("7.READ DATA FROM THE JSON FILE");
+            System.out.println("8.EXIT APPLICATION");
             r = sc.nextInt();
             AddressBook book;
             switch (r) {
@@ -101,7 +104,6 @@ public class AddressBookSystem {
 
 
                 case 6 : {
-
                         String filename =  "C:\\Users\\Nc Saketh\\eclipse-workspace\\AddressBookSystem\\src\\DATA.csv";
                         File inputFile = new File(filename);
                         try (FileReader inputFileReader = new FileReader(inputFile);
@@ -118,6 +120,22 @@ public class AddressBookSystem {
                             System.out.println(e.getMessage());
                         }
                         System.out.println("Address Book read from CSV");
+                }
+
+                case 7 : {
+                    String JSON_read_file = "C:\\Users\\Nc Saketh\\eclipse-workspace\\AddressBookSystem\\src\\DATAjson.txt";
+                    Gson gson = new Gson();
+                    BufferedReader br= null;
+                    try {
+                        br = new BufferedReader(new FileReader(JSON_read_file));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    Contact[] usrObj= gson.fromJson(br, Contact[].class);
+                    List<Contact> contactList = Arrays.asList(usrObj);
+                    for (Contact c : contactList){
+                        c.addContact();
+                    }
                 }
 
             }
@@ -278,6 +296,7 @@ public class AddressBookSystem {
             }
             writeInFile(adbook.get(j).contact);
             writeDataCSV(adbook.get(j).contact);
+            writeDataJson(adbook.get(j).contact);
 
         }
         if (key == 0) {
@@ -373,5 +392,34 @@ public class AddressBookSystem {
         System.out.println("Address Book added to CSV");
         return true;
     }
+
+    static boolean writeDataJson(ArrayList <Contact> arr) {
+        try {
+            String JSON_write_file ="C:\\Users\\Nc Saketh\\eclipse-workspace\\AddressBookSystem\\src\\DATAjson.txt";
+            Gson gson = new Gson();
+            String json = gson.toJson(arr);
+            FileWriter Writer = new FileWriter(JSON_write_file);
+            Writer.write(json);
+            Writer.close();
+            return true;
+        }
+        catch(Exception e)
+        {
+            return false;
+        }
+    }
+
+//    public void readJSON() throws FileNotFoundException {
+//        String JSON_read_file = "C:\\Users\\Nc Saketh\\eclipse-workspace\\AddressBookSystem\\src\\DATAjson.json";
+//        Gson gson = new Gson();
+//        BufferedReader br= new BufferedReader(new FileReader(JSON_read_file));
+//        Contact[] usrObj= gson.fromJson(br, Contact[].class);
+//        List<Contact> contactList = Arrays.asList(usrObj);
+//        for (Contact c : contactList){
+//            c.addContact();
+//        }
+//    }
+
+
 
 }
