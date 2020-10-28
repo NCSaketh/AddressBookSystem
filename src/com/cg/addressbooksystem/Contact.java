@@ -5,7 +5,15 @@ import java.util.Scanner;
 
 class Contact {
     Scanner sc = new Scanner(System.in);
-    String first_name, last_name, address, String, city, state, zip, ph_no, email;
+    static String first_name;
+    String last_name;
+    String address;
+    String String;
+    String city;
+    String state;
+    String zip;
+    String ph_no;
+    String email;
 
     public boolean equals(Contact cnt) {
         if (cnt.first_name.equalsIgnoreCase(this.first_name) && cnt.last_name.equalsIgnoreCase(this.last_name)) {

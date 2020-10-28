@@ -1,2 +1,2 @@
-p, q
-x, y
+st, cd
+st, uv

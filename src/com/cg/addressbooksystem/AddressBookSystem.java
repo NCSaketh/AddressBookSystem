@@ -7,6 +7,12 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
+import com.opencsv.bean.StatefulBeanToCsv;
+import com.opencsv.bean.StatefulBeanToCsvBuilder;
+
+
 
 public class AddressBookSystem {
 
@@ -53,13 +59,14 @@ public class AddressBookSystem {
         ArrayList<AddressBook> adbook = new ArrayList<AddressBook>();
 
         int r = 0;
-        while (r != 6) {
+        while (r != 8) {
             System.out.println("1.CREATE AN ADDRESS BOOK");
             System.out.println("2.ACCESS AN ADDRESS BOOK");
             System.out.println("3.SEARCH PERSON IN A CITY ACROSS ALL ADDRESS BOOKS");
             System.out.println("4.SEARCH PERSON IN A STATE ACROSS ALL ADDRESS BOOKS");
             System.out.println("5.READ DATA FROM THE FILE");
-            System.out.println("6.EXIT APPLICATION");
+            System.out.println("6.READ DATA FROM THE CSV FILE");
+            System.out.println("7.EXIT APPLICATION");
             r = sc.nextInt();
             AddressBook book;
             switch (r) {
@@ -81,17 +88,38 @@ public class AddressBookSystem {
                 }
 
                 case 5: {
-                    try {
-                        FileReader f=new FileReader("C:\\Users\\Nc Saketh\\eclipse-workspace\\AddressBookSystem\\Data.txt");
-                        int i;
-                        while((i=f.read())!=-1)
-                            System.out.print((char)i);
-                    }
-                    catch(Exception e) {
-
-                    }
-                    break;
+                        try {
+                            FileReader f=new FileReader("C:\\Users\\Nc Saketh\\eclipse-workspace\\AddressBookSystem\\Data.txt");
+                            int i;
+                            while((i=f.read())!=-1)
+                                System.out.print((char)i);
+                        }
+                        catch(Exception e) {
+                        }
+                        break;
                 }
+
+
+                case 6 : {
+
+                        String filename =  "C:\\Users\\Nc Saketh\\eclipse-workspace\\AddressBookSystem\\src\\DATA.csv";
+                        File inputFile = new File(filename);
+                        try (FileReader inputFileReader = new FileReader(inputFile);
+                             CSVReader inputCSVReader = new CSVReader(inputFileReader)){
+                            String[] rowData = null;
+                            String[] header = inputCSVReader.readNext();
+                            while((rowData = inputCSVReader.readNext()) != null) {
+                                for(int i=0; i<rowData.length; i++) {
+                                    System.out.print(header[i] + ": " + rowData[i] + " | ");
+                                }
+                                System.out.println();
+                            }
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
+                        System.out.println("Address Book read from CSV");
+                }
+
             }
         }
     }
@@ -131,6 +159,7 @@ public class AddressBookSystem {
         String b = sc.next();
         for (int j = 0; j < adbook.size(); j++)
         {
+
             if (adbook.get(j).BookName.equalsIgnoreCase(b))
             {
                 key = 1;
@@ -243,10 +272,13 @@ public class AddressBookSystem {
                         break;
                     }
 
+
                 }
 
             }
             writeInFile(adbook.get(j).contact);
+            writeDataCSV(adbook.get(j).contact);
+
         }
         if (key == 0) {
             System.out.println("This Address Book does not exist!");
@@ -318,5 +350,28 @@ public class AddressBookSystem {
         }
     }
 
+
+
+    static boolean writeDataCSV(ArrayList <Contact> arr)
+    {
+        String filename = "C:\\Users\\Nc Saketh\\eclipse-workspace\\AddressBookSystem\\src\\DATA.csv";
+        File outputFile = new File(filename);
+        try (FileWriter outputFileWriter = new FileWriter(outputFile);
+             CSVWriter outputCSVWriter = new CSVWriter(outputFileWriter)){
+            String[] header = {"First Name", "Last Name", "Address", "City", "State", "PhoneNumber", "Email", "Zip" };
+            outputCSVWriter.writeNext(header);
+            for(Contact contact : arr) {
+                String[] rowData = {contact.first_name, contact.last_name,
+                        contact.address, contact.city, contact.state,
+                        contact.ph_no, contact.email,contact.zip};
+                outputCSVWriter.writeNext(rowData);
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        System.out.println("Address Book added to CSV");
+        return true;
+    }
 
 }
